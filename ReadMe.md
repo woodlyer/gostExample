@@ -14,7 +14,7 @@ version 3 is here https://github.com/go-gost/gost
 **version 3 is now under developing. Not for publishing. **
 
 Offical doc site for v2: https://v2.gost.run/  
-offical doc site for v3: https://gost.run/
+Offical doc site for v3: https://gost.run/
 
 
 ## Download and run
@@ -34,7 +34,7 @@ On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/util
 gost is named from "GO Simple Tunnel", and it's always used as a tunnel.  
 Although gost can works as a proxy.  
 
-When gost works as tunnel, the network is like this.
+When gost works as tunnel, the network is like this.  
 Gost client and gost server set up a tunnel to serve for proxy server run on.
 ![net](./tunnel.png)
 
@@ -44,7 +44,7 @@ Gost client and gost server set up a tunnel to serve for proxy server run on.
 The first line is for gost server, running on VPS.  
 The second line is for gost client, running on your PC.
 
-You are running SS(shadowsocks) or v2ray on 8388, the gost tunnel works on 127.0.0.1:8083 links to SS or V2ray on your server.  
+Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, the gost tunnel works on 127.0.0.1:8083 links to SS or V2ray on your server.  
 
 You should modified the server_ip to your own domain name or ip address. 
 
