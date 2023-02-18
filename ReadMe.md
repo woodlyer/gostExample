@@ -20,13 +20,11 @@ Offical doc site for v3: https://gost.run/
 ## Download and run
 Open release page to down the binaries for your platform.  
 v2: https://github.com/ginuerzh/gost/releases  
-v3: https://github.com/go-gost/gost/releases
+v3: https://github.com/go-gost/gost/releases  
 
 On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background. 
-
-On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfault-bilibili/ShadowsocksGostPlugin) .
-
-On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/utilities/shadowrocket) .
+On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfault-bilibili/ShadowsocksGostPlugin) .  
+On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/utilities/shadowrocket) .  
 
 
 ## General Net Knowlege
@@ -49,7 +47,8 @@ Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, th
 You should modified the server_ip to your own domain name or ip address. 
 
 - kcp tunnel  
-kcp protocal is based on udp. kcp can speed up your connection and keep your connection secure.
+kcp protocal is based on udp.  
+kcp can speed up your connection and keep your connection secure.
 
 ```
 # server,  ss or v2ray listen on 8083 
@@ -62,8 +61,8 @@ If you want to change some parameter of kcp. you can write a kcp.json and append
 ./gost -L tcp://127.0.0.1:8083  -F forward+kcp://server_ip:9000?c=./kcp.json
 ```
 
-I recommend you to change the kcp.json. Not to use default parameter.
-
+I recommend you to change the kcp.json. Not to use default parameter.  
+More info about kcp parameter. see: https://github.com/xtaci/kcptun
 ``` json
 {
     "key": "it's a secrect",
@@ -103,21 +102,21 @@ I recommend you to change the kcp.json. Not to use default parameter.
 - quic tunnel
 ```
 ./gost -L quic://:1443/:8083
-./gost.exe -L tcp://127.0.0.1:8083  -F "forward+quic://server_ip:1443"
+./gost -L tcp://127.0.0.1:8083  -F "forward+quic://server_ip:1443"
 ```
 
-- dtls tunnel
+- dtls tunnel.  
 dtls in only available in v3. Not tested.
 ```
 ./gost -L dtls://:1443/:8083
-./gost.exe -L tcp://127.0.0.1:8083  -F "forward+dtls://server_ip:1443"
+./gost -L tcp://127.0.0.1:8083  -F "forward+dtls://server_ip:1443"
 ```
 
-- icmp tunnel  only for v3
+- icmp tunnel.   only for v3
 ```
 echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
-gost -L icmp://:0
-gost -L :8080 -F "relay+icmp://server_ip:12345?keepAlive=true&ttl=10s"
+./gost -L icmp://:0
+./gost -L :8080 -F "relay+icmp://server_ip:12345?keepAlive=true&ttl=10s"
 
 
 ```
