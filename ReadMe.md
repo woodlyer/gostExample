@@ -3,9 +3,10 @@
 Help you to use gost.  
 gost is a very good tunnel tool.  
 But it's document is not very clear.  
-And gost itself is very complicated, because it's powerful.  
+And gost itself is very very complicated, because it's powerful.  
 
 Here, I want to show some examples to help ordinary users to use gost.  
+It doesn't mean gost can only do this. Just because gost is too powerful for everyone to handle. A little sample is enough for we to surf internet.    
 
 
 ## Introduce
