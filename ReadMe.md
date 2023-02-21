@@ -37,7 +37,7 @@ Gost client and gost server set up a tunnel to serve for proxy server run on.
 ![net](./tunnel.png)
 
 
-## Tunnel Example
+## gost Tunnel Example
 
 The first line is for gost server, running on VPS.  
 The second line is for gost client, running on your PC.
@@ -46,7 +46,7 @@ Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, th
 
 You should modified the server_ip to your own domain name or ip address. 
 
-- kcp tunnel  
+- kcp tunnel (I recommend you use this to speed up and secure)   
 kcp protocal is based on udp.  
 kcp can speed up your connection and keep your connection secure.
 
@@ -121,7 +121,7 @@ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 ```
 
-## proxy Examples
+## gost Proxy Examples
 
 gost act as a socks5 proxy.  
 you can connect socks5://127.0.0.1:8080 to connect the internet.
