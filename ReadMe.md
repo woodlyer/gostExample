@@ -11,11 +11,10 @@ It doesn't mean gost can only do this. Just because gost is too powerful for eve
 
 ## Introduce
 version 2 is here https://github.com/ginuerzh/gost  
-version 3 is here https://github.com/go-gost/gost  
-**version 3 is now under developing. Not for publishing. **
+version 3 is here https://github.com/go-gost/gost **version 3 is now under developing. Not for publishing. **  
 
-Offical doc site for v2: https://v2.gost.run/  
-Offical doc site for v3: https://gost.run/
+Offical DOC site for v2: https://v2.gost.run/  
+Offical DOC site for v3: https://gost.run/
 
 
 ## Download and run
@@ -126,6 +125,8 @@ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 gost act as a socks5 proxy.  
 you can connect socks5://127.0.0.1:8080 to connect the internet.
+different protocal used to pass the wall.
+
 - tls proxy
 ```
 ./gost -L tls://:443
@@ -151,6 +152,41 @@ you can connect socks5://127.0.0.1:8080 to connect the internet.
 ```
 
 
+
+
+
+## Remote port forward
+If You want to connect  remote_ip and port. But you cann't for some reason.  
+So, You let the server do the port forward.   client directly connect to gost client to connect target.
+client ->  [gost client]  -> [gost server]  ->  [target ip+port]
+
+
+The cmd is like this,  kcp can be replaced with tls,quic,socks,etc...
+```
+# this is recomended
+# client set remote ip and port
+./gost -L kcp://:9000  #gost server
+.\gost.exe -L=rtcp://127.0.0.1:9000/remote_ip:port -F forward+kcp://server_ip:9000   #gost client
+```
+client connect 127.0.0.1:9000 as connect to [remote_ip:port]
+This cmd only need change the para(remote_ip:port) on client.  
+It's very good for user.  
+
+
+Another methods to do remote port forward.
+``` bash
+# server do the port forward
+./gost -L kcp://:9000/remote_ip:port  #server
+.\gost.exe -L tcp://127.0.0.1:9000 -F forward+kcp://server_ip:9000
+
+
+# working. but not recommended maybe a little low efficency
+./gost -L kcp://:9000  #server
+.\gost.exe -L tcp://127.0.0.1:9000/remote_ip:port -F kcp://server_ip:9000
+```
+
+
+
 ## Some tips
 
 - run gost at background in Linux
@@ -158,21 +194,6 @@ use nohup to run gost in background and the log redirect to gost.log
 ``` 
   nohup ./gost -L mtls://:443  >> gost.log  2>&1 &
 ```
-
-
-
-
-## Remote port forward
-
-
-```
-./gost -L kcp://:9000  #server
-.\gost.exe -L=rtcp://127.0.0.1:9000/remote_ip:port -F forward+kcp://server_ip:9000
-```
-client connect 127.0.0.1:9000 as  [remote_ip:port]
-This cmd only need change the para(remote_ip:port) on client.  
-It's very good for user.  
-
 
 
 
