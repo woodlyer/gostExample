@@ -166,24 +166,38 @@ The cmd is like this,  kcp can be replaced with tls,quic,socks,etc...
 # this is recomended
 # client set remote ip and port
 ./gost -L kcp://:9000  #gost server
-.\gost.exe -L=rtcp://127.0.0.1:9000/remote_ip:port -F forward+kcp://server_ip:9000   #gost client
+./gost -L=rtcp://127.0.0.1:9000/remote_ip:port -F forward+kcp://server_ip:9000   #gost client
 ```
 client connect 127.0.0.1:9000 as connect to [remote_ip:port]
 This cmd only need change the para(remote_ip:port) on client.  
 It's very good for user.  
 
 
+remote port mapping with relay 
+```bash
+# standard using
+./gost -L relay+tls://:9000 
+./gost  -L=tcp://127.0.0.1:9000/remote_ip:port -F relay+tls://server_ip:9000
+```
+
+
+
 Another methods to do remote port forward.
 ``` bash
 # server do the port forward
 ./gost -L kcp://:9000/remote_ip:port  #server
-.\gost.exe -L tcp://127.0.0.1:9000 -F forward+kcp://server_ip:9000
+./gost -L tcp://127.0.0.1:9000 -F forward+kcp://server_ip:9000
+
 
 
 # working. but not recommended maybe a little low efficency
 ./gost -L kcp://:9000  #server
-.\gost.exe -L tcp://127.0.0.1:9000/remote_ip:port -F kcp://server_ip:9000
+./gost -L tcp://127.0.0.1:9000/remote_ip:port -F kcp://server_ip:9000
 ```
+
+
+
+
 
 
 
