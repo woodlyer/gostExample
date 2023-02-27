@@ -162,17 +162,23 @@ use nohup to run gost in background and the log redirect to gost.log
 
 
 
+## Remote port forward
+
+
+```
+./gost -L kcp://:9000  #server
+.\gost.exe -L=rtcp://127.0.0.1:9000/remote_ip:port -F forward+kcp://server_ip:9000
+```
+client connect 127.0.0.1:9000 as  [remote_ip:port]
+This cmd only need change the para(remote_ip:port) on client.  
+It's very good for user.  
 
 
 
 
 
 
-
-
-
-
-## Don't have a VPS?
+## Doesn't have a VPS?
 Oh, It's very easy. Buy one.
 
 - [bandwagonhost](https://bandwagonhost.com/aff.php?aff=56257)   $49.9 for 1 year.
