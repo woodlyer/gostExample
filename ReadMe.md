@@ -173,14 +173,6 @@ This cmd only need change the para(remote_ip:port) on client.
 It's very good for user.  
 
 
-remote port mapping with relay 
-```bash
-# standard using
-./gost -L relay+tls://:9000 
-./gost  -L=tcp://127.0.0.1:9000/remote_ip:port -F relay+tls://server_ip:9000
-```
-
-
 
 Another methods to do remote port forward.
 ``` bash
@@ -197,7 +189,25 @@ Another methods to do remote port forward.
 
 
 
+remote port mapping with relay 
+```bash
+# standard using
+./gost -L relay+tls://:9000 
+./gost -L=tcp://127.0.0.1:9000/remote_ip:port  -F relay+tls://server_ip:9000
+```
 
+
+
+
+## TCP Port Mapping for relay
+Use gost listen on 22 to connect 192.168.1.100:22.
+Other clients which cannot connect to 192.168.1.100 can connect gost to dest.
+client  ->  gost[:22]  ->  192.168.1.100:22
+```
+gost -L tcp://:22/192.168.1.100:22
+# ssh
+ssh root@127.0.0.1 -p 22   
+```
 
 
 
@@ -234,6 +244,12 @@ Such as:
 - 1.[justMysocks.net](https://justmysocks.net/members/aff.php?aff=24386)   
 - 2.[ExpressVPN](https://www.expressvpn.com/) 
 - 3.[StrongVPN](https://www.strongvpn.com) 
+
+
+
+
+## Star 
+You have read to here, why not click the star button for once?
 
 
 
