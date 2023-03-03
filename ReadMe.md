@@ -22,12 +22,12 @@ Open release page to down the binaries for your platform.
 v2: https://github.com/ginuerzh/gost/releases  
 v3: https://github.com/go-gost/gost/releases  
 
-On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background. 
+On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background.  
 On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfault-bilibili/ShadowsocksGostPlugin) .  
 On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/utilities/shadowrocket) .  
 
 
-## General Net Knowlege
+## General Network Knowlege
 
 gost is named from "GO Simple Tunnel", and it's always used as a tunnel.  
 Although gost can works as a proxy.  
@@ -46,7 +46,9 @@ Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, th
 
 You should modified the server_ip to your own domain name or ip address. 
 
-- kcp tunnel (I recommend you use this to speed up and secure)   
+Gost supports many protocol. Such as quic, kcp, wss, tls etc. You may change the protocal to the one you need.  
+
+- kcp tunnel (I recommend you use kcp to speed up and secure)   
 kcp protocal is based on udp.  
 kcp can speed up your connection and keep your connection secure.
 
@@ -61,8 +63,9 @@ If you want to change some parameter of kcp. you can write a kcp.json and append
 ./gost -L tcp://127.0.0.1:8083  -F forward+kcp://server_ip:9000?c=./kcp.json
 ```
 
-I recommend you to change the kcp.json. Not to use default parameter.  
-More info about kcp parameter. see: https://github.com/xtaci/kcptun
+I recommend you to change the kcp.json. But default parameter doesn't matter much.   
+More info about kcp parameter. see: https://github.com/xtaci/kcptun  
+kcp.json :
 ``` json
 {
     "key": "it's a secrect",
@@ -95,7 +98,7 @@ More info about kcp parameter. see: https://github.com/xtaci/kcptun
 
 ```
 ./gost -L tls://:443/:8083
-./gost -L=tcp://:8083 -F forward+tls://server_ip:443
+./gost -L=tcp://127.0.0.1:8083 -F forward+tls://server_ip:443
 ```
 
 
