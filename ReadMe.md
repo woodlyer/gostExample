@@ -161,48 +161,47 @@ different protocal used to pass the wall.
 ## Remote port forward
 If You want to connect  remote_ip and port. But you cann't for some reason.  
 So, You let the server do the port forward.   client directly connect to gost client to connect target.
-client ->  [gost client]  -> [gost server]  ->  [target ip+port]
+client ->  [gost client:port]  -> [gost server]  ->  [target ip+port]
 
 
 The cmd is like this,  kcp can be replaced with tls,quic,socks,etc...
-```
-# this is recomended
-# client set remote ip and port
-./gost -L kcp://:9000  #gost server
-./gost -L=rtcp://127.0.0.1:9000/remote_ip:port -F forward+kcp://server_ip:9000   #gost client
-```
 client connect 127.0.0.1:9000 as connect to [remote_ip:port]
 This cmd only need change the para(remote_ip:port) on client.  
 It's very good for user.  
 
+```
+# client easily change the remote_ip and port
+./gost -L relay+kcp://:9000  
+./gost -L=tcp://127.0.0.1:8388/remote_ip:port   -F relay+kcp://server_ip:9000   
+```
+
+using tls to relay
+```bash
+./gost -L relay+tls://:9000 
+./gost -L=tcp://127.0.0.1:8388/remote_ip:port  -F relay+tls://server_ip:9000
+```
 
 
 Another methods to do remote port forward.
 ``` bash
 # server do the port forward
-./gost -L kcp://:9000/remote_ip:port  #server
+./gost -L kcp://:9000/remote_ip:port  
 ./gost -L tcp://127.0.0.1:9000 -F forward+kcp://server_ip:9000
 
 
-
 # working. but not recommended maybe a little low efficency
-./gost -L kcp://:9000  #server
+./gost -L kcp://:9000   
 ./gost -L tcp://127.0.0.1:9000/remote_ip:port -F kcp://server_ip:9000
 ```
 
 
 
-remote port mapping with relay 
-```bash
-# standard using
-./gost -L relay+tls://:9000 
-./gost -L=tcp://127.0.0.1:9000/remote_ip:port  -F relay+tls://server_ip:9000
-```
 
 
 
 
-## TCP Port Mapping for relay
+
+## TCP Port Mapping for relay on one PC
 Use gost listen on 22 to connect 192.168.1.100:22.
 Other clients which cannot connect to 192.168.1.100 can connect gost to dest.
 client  ->  gost[:22]  ->  192.168.1.100:22
