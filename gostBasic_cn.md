@@ -94,8 +94,8 @@ gost -L tls://:443 -F ws://:1443
 
 ## 端口转发
 
-- TCP本地端口转发
-tcp://:port_A/ip_B:port_B
+- TCP本地端口转发  
+tcp://:port_A/ip_B:port_B  
 将本地的TCP端口A映射到指定的目标TCP端口B，连接至端口A，实际上是连接到远处的端口B。
 ```
 ./gost -L :1080
@@ -104,8 +104,8 @@ tcp://:port_A/ip_B:port_B
 将本机TCP端口2222上的数据(通过代理链)转发到（服务端看到的）192.168.1.1:22上。  
 当你连接时 127.0.0.1:2222时，其实是连接到服务端那边的 192.168.1.1:22。
 
-- TCP远程端口转发
-rtcp://:port_A/ip_B:port_B
+- TCP远程端口转发  
+rtcp://:port_A/ip_B:port_B  
 将目标TCP端口B映射到远程TCP端口A，连接到到端口A，即连接到端口B。 
 ```
 ./gost -L :1080       # server on 172.24.10.1
@@ -119,7 +119,7 @@ rtcp://:port_A/ip_B:port_B
 
 
 ## SOCKS5多路复用模式
-在2.5版本中，SOCKS5的BIND方法增加了对多路复用的支持，远程端口转发可以利用这个特性提高传输效率。
+在2.5版本中，SOCKS5的BIND方法增加了对多路复用的支持，远程端口转发可以利用这个特性提高传输效率。  
 ```
 gost -L rtcp://:8080/192.168.1.1:80 -F socks5://:1080?mbind=true
 ```
@@ -148,15 +148,20 @@ gost -L :8080 -F relay+tls://username:password@:12345?nodelay=false
 
 - 转发功能  
 Relay转发有两种模式，一种是配合端口转发使用，另一种是配合转发隧道使用。两种模式均可以同时转发TCP和UDP数据。  
-端口转发:  
+端口转发和转发隧道都用于tcp/udp端口转发，区别就是：在client还是在server控制转发的目的地址。  
+在客户端控制会灵活一点，推荐“端口转发”方式。
+
+**端口转发: ** 
 ```
 # 服务端
 gost -L relay://:12345
 # 客户端
 gost -L udp://:1053/:53    -L tcp://:1053/:53  -F relay://:12345
+# 在不改变服务端的情况下，从客户端改变relay的目的地到google.com:53。
+gost -L tcp://:1053/google.com:53  -F relay://:12345
 ```
 
-转发隧道:  
+**转发隧道:  **
 ```
 # 服务端
 gost -L relay://:12345/:53
