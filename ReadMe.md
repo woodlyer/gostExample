@@ -215,6 +215,7 @@ ssh root@127.0.0.1 -p 22
 SS + KCP  
 run gost and ss on server, SS client connect to 127.0.0.1:8838 as connect to remote server.  
 ```
+# server 
 wget  https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz
 gzip -dk  gost-linux-amd64-2.11.5.gz
 mv  gost-linux-amd64-2.11.5  gost
@@ -224,13 +225,6 @@ chmod +x  gost
 # client
 ./gost  -L tcp://127.0.0.1:8838  -F "forward+kcp://server_ip:9000"
 ```
-
-
-
-
-
-
-
 
 
 
