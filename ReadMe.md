@@ -211,7 +211,7 @@ ssh root@127.0.0.1 -p 22
 
 
 
-## run gost with SS
+## running KCP + SS
 SS + KCP  
 run gost and ss on server, SS client connect to 127.0.0.1:8838 as connect to remote server.  
 ```
@@ -223,7 +223,7 @@ chmod +x  gost
 ./gost -L kcp://:9000/:8838  -L ss://aes-256-gcm:passwd@127.0.0.1:8838 
 
 # client
-./gost  -L tcp://127.0.0.1:8838  -F "forward+kcp://server_ip:9000"
+./gost  -L tcp://:8838  -F "forward+kcp://server_ip:9000"
 ```
 
 
