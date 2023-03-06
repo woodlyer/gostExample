@@ -1,5 +1,5 @@
 # gost基本知识
-----------------------------------------------
+一些gost官方网站上的文档，摘要和集中了一下。便于学习和理解。
 
 
 ## gost 默认是一个socks5代理服务
@@ -34,7 +34,7 @@ reload - 此配置文件支持热更新。此选项用来指定文件检查周�
 所有的认证信息都是用于协议层(Protocol)。  
 
 
-## -F转发
+## -F 转发链
 
 -F 用来将socks5请求转发出去。
 ```
@@ -128,7 +128,7 @@ gost -L rtcp://:8080/192.168.1.1:80 -F socks5://:1080?mbind=true
 
 
 
-## Relay协议
+## Relay 的用法
 Relay是GOST(2.11+)支持的一种协议类型(Protocol)。  
 Relay协议本身不具备加密功能，如果需要对数据进行加密传输，可以配合加密隧道使用。  
 
@@ -164,8 +164,51 @@ gost -L relay://:12345/:53
 gost -L tcp://:1053 -F relay://:12345
 ```
 
+## Forward 的用法
+### 添加数据通道
+通过转发可以为已存在的服务动态增加数据通道。  
+- HTTP-over-TLS  
+```
+gost -L tls://:8443/:8080 -L http://:8080
+```
+通过使用TLS数据通道的端口转发，给8080端口的HTTP代理服务增加了TLS加密数据通道。  
+此时8443端口等同于：
+```
+gost -L https://:8443
+```
 
+- Shadowsocks-over-KCP
+```
+gost -L kcp://:8338/:8388 -L ss://:8388
+```
+通过使用KCP数据通道的端口转发，给8388端口的shadowsocks代理服务增加了KCP数据通道。
+此时8338端口等同于：
+```
+gost -L ss+kcp://:8338
+```
 
+### forward用于去除数据通道
+与上面的例子相反，也可以通过转发将现有服务的数据通道去除。
+- HTTPS to HTTP
+将HTTPS代理服务转成HTTP代理服务
+```
+gost -L https://:8443
+gost -L tcp://:8080 -F forward+tls://:8443
+```
+此时8080端口等同于：
+```
+gost -L http://:8080
+```
+
+- Shadowsocks-over-KCP to Shadowsocks
+```
+gost -L ss+kcp://:8338
+gost -L tcp://:8080 -F forward+kcp://:8338
+```
+此时8080端口等同于：
+```
+gost -L ss://:8080
+```
 
 
 
