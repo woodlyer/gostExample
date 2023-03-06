@@ -43,12 +43,11 @@ The first line is for gost server, running on VPS.
 The second line is for gost client, running on your PC.
 
 Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, the gost tunnel works on 127.0.0.1:8083 links to SS or V2ray on your server.  
-
-You should modified the server_ip to your own domain name or ip address. 
-
+You should modified the server_ip to your own domain name or ip address.   
 Gost supports many protocol. Such as quic, kcp, wss, tls etc. You may change the protocal to the one you need.  
 
-- kcp tunnel (I recommend you use kcp to speed up and secure)   
+- kcp tunnel  
+I recommend you use kcp to speed up and secure.  
 kcp protocal is based on udp.  
 kcp can speed up your connection and keep your connection secure.
 
@@ -57,7 +56,8 @@ kcp can speed up your connection and keep your connection secure.
 ./gost -L kcp://:9000/:8083 
 ./gost -L tcp://127.0.0.1:8083  -F forward+kcp://server_ip:9000
 ```
-If you want to change some parameter of kcp. you can write a kcp.json and append it into cmd.  like this:  
+If you want to change some parameter of kcp. you can write a file named "kcp.json" and append it into cmd.  
+like this:  
 ```
 ./gost -L kcp://:9000/:8083?c=./kcp.json 
 ./gost -L tcp://127.0.0.1:8083  -F forward+kcp://server_ip:9000?c=./kcp.json
@@ -101,7 +101,6 @@ kcp.json :
 ./gost -L=tcp://127.0.0.1:8083 -F forward+tls://server_ip:443
 ```
 
-
 - quic tunnel
 ```
 ./gost -L quic://:1443/:8083
@@ -109,23 +108,21 @@ kcp.json :
 ```
 
 - dtls tunnel.  
-dtls in only available in v3. Not tested.
+dtls is only available in v3. 
 ```
 ./gost -L dtls://:1443/:8083
 ./gost -L tcp://127.0.0.1:8083  -F "forward+dtls://server_ip:1443"
 ```
 
-- icmp tunnel.   only for v3
+- icmp tunnel.   
+icmp tunnel is only available in v3.
 ```
 echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 ./gost -L icmp://:0
 ./gost -L :8080 -F "relay+icmp://server_ip:12345?keepAlive=true&ttl=10s"
-
-
 ```
 
 ## gost Proxy Examples
-
 gost act as a socks5 proxy.  
 you can connect socks5://127.0.0.1:8080 to connect the internet.
 different protocal used to pass the wall.
@@ -186,7 +183,7 @@ Another methods to do remote port forward.
 ``` bash
 # server do the port forward
 ./gost -L kcp://:9000/remote_ip:port  
-./gost -L tcp://127.0.0.1:9000 -F forward+kcp://server_ip:9000
+./gost -L tcp://127.0.0.1:8388 -F forward+kcp://server_ip:9000
 
 
 # working. but not recommended maybe a little low efficency
@@ -231,7 +228,7 @@ Oh, It's very easy. Buy one.
 - [bandwagonhost](https://bandwagonhost.com/aff.php?aff=56257)   $49.9 for 1 year.
 - [vultr.com](https://www.vultr.com/?ref=7621285)  Easy to use.
 - [DMIT](https://www.dmit.io/)   Many data center.
-- [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/BlackFriday/).  $10.28 for 1 year.
+- [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/BlackFriday/).  Only $10.28 for 1 year.
 
 
 
