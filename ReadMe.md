@@ -45,10 +45,13 @@ The second line is for gost client, running on your PC.
 Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, the gost tunnel works on 127.0.0.1:8083 links to SS or V2ray on your server.  
 You should modified the server_ip to your own domain name or ip address.   
 Gost supports many protocol. Such as quic, kcp, wss, tls etc. You may change the protocal to the one you need.  
+ *** caution *** 
+In the example, I write "tcp://127.0.0.1:8083",  gost only serve for this PC.   
+If you want to serve for other PC,  you should write "tcp://:8083" .  
+
 
 - kcp tunnel  
-I recommend you use kcp to speed up and secure.  
-kcp protocal is based on udp.  
+I recommend you use kcp. kcp protocal is based on udp.  
 kcp can speed up your connection and keep your connection secure.
 
 ```
@@ -211,7 +214,7 @@ ssh root@127.0.0.1 -p 22
 
 
 
-## running KCP + SS
+## gost cmds to run KCP + SS
 SS + KCP  
 run gost and ss on server, SS client connect to 127.0.0.1:8838 as connect to remote server.  
 ```
@@ -220,10 +223,13 @@ wget  https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd6
 gzip -dk  gost-linux-amd64-2.11.5.gz
 mv  gost-linux-amd64-2.11.5  gost
 chmod +x  gost
-./gost -L kcp://:9000/:8838  -L ss://aes-256-gcm:passwd@127.0.0.1:8838 
+./gost -L kcp://:9000/:8388  -L ss://aes-256-gcm:passwd@127.0.0.1:8388 
 
 # client
-./gost  -L tcp://:8838  -F "forward+kcp://server_ip:9000"
+./gost  -L tcp://:8388  -F "forward+kcp://server_ip:9000"
+
+# ss param
+ss://aes-256-gcm:passwd@127.0.0.1:8388 
 ```
 
 
