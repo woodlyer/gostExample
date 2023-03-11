@@ -215,7 +215,6 @@ ssh root@127.0.0.1 -p 22
 
 
 ## gost cmds to run KCP + SS
-SS + KCP  
 run gost and ss on server, SS client connect to 127.0.0.1:8838 as connect to remote server.  
 ```
 # server 
@@ -239,7 +238,7 @@ ss://aes-256-gcm:passwd@127.0.0.1:8388
 
 ## Some tips
 
-- run gost at background in Linux
+- run gost at background in Linux  
 use nohup to run gost in background and the log redirect to gost.log  
 ``` 
   nohup ./gost -L mtls://:443  >> gost.log  2>&1 &
