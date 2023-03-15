@@ -214,6 +214,30 @@ ssh root@127.0.0.1 -p 22
 
 
 
+
+## gost remote port forward
+
+Forward the port :2222 on the server to the host(192.168.1.1:22) in client side.
+[remote](./remote.png)
+
+
+```
+# server
+./gost -L kcp://:9000
+# client
+./gost -L=rtcp://:2222/192.168.1.1:22  -F=kcp://server_ip:9000
+
+# ssh cmd
+ssh root@server_ip -p 2222
+```
+
+
+
+
+
+
+
+
 ## gost cmds to run KCP + SS
 run gost and ss on server, SS client connect to 127.0.0.1:8838 as connect to remote server.  
 ```
