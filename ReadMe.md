@@ -135,25 +135,25 @@ Use kcp or other different protocal to pass the wall.
 - tls proxy
 ```
 ./gost -L tls://:443
-./gost -L :8080 -F tls://server_ip:443
+./gost -L :1080 -F tls://server_ip:443
 ```
 
 - mtls proxy
 ```
 ./gost -L mtls://:443
-./gost -L :8080 -F mtls://server_ip:443
+./gost -L :1080 -F mtls://server_ip:443
 ```
 
 - kcp proxy
 ```
-./gost -L=kcp://:8388
-./gost -L=:8080 -F=kcp://server_ip:8388
+./gost -L=kcp://:9000
+./gost -L=:1080 -F=kcp://server_ip:9000
 ```
 
 - kcp proxy with fake tcp
 ```
-./gost -L=kcp://:8388?tcp=true
-./gost -L=:8080 -F=kcp://server_ip:8388?tcp=true
+./gost -L=kcp://:9000?tcp=true
+./gost -L=:1080 -F=kcp://server_ip:9000?tcp=true
 ```
 
 
