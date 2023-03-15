@@ -219,7 +219,7 @@ ssh root@127.0.0.1 -p 22
 
 Forward the port :2222 on the server to the host(192.168.1.1:22) in client side.  
 
-<img src="./rtcp.jpg" width="200"  alt="rtcp"/><br/>
+<img src="./rtcp.png" width="600"  alt="rtcp"/><br/>
 
 ```
 # server
