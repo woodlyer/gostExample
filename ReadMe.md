@@ -128,7 +128,9 @@ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 ## gost Proxy Examples
 gost act as a socks5 proxy.  
 you can connect socks5://127.0.0.1:8080 to connect the internet.
-different protocal used to pass the wall.
+Use kcp or other different protocal to pass the wall.  
+<img src="./proxy.png" width="600"  alt="proxy"/><br/>
+
 
 - tls proxy
 ```
