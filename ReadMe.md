@@ -276,7 +276,7 @@ These protocal only works up on the transport.
 
 ### Transports Protocols  
 Tunnel based on these transport protocals.  
-You may change the protocal in cmd to protocal list here.    
+You may change the protocal in cmd to protocal list here.  
 - tcp - raw TCP
 - tls - TLS
 - mtls - Multiplex TLS, add multiplex on TLS (2.5+)
@@ -293,8 +293,11 @@ You may change the protocal in cmd to protocal list here.
 - ohttp - HTTP Obfuscation (2.7+)
 - otls - TLS Obfuscation (2.11+)
 
-
-
+### How to choose a good transport protocol?  
+kcp and quic are based on udp. If udp is blocked you cannot use them.  
+kcp support tcp mode.  use like this:  ./gost -L=kcp://:9000?tcp=true  
+tls / mtls is widely used when use tcp.   
+ws / wss / http is a little lower efficiency than tls.  
 
 
 
