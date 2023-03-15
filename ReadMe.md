@@ -218,7 +218,7 @@ ssh root@127.0.0.1 -p 22
 run gost and ss on server, SS client connect to 127.0.0.1:8838 as connect to remote server.  
 ```
 # server 
-wget  https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz
+wget --no-check-certificate  https://github.com/ginuerzh/gost/releases/download/v2.11.5/gost-linux-amd64-2.11.5.gz
 gzip -dk  gost-linux-amd64-2.11.5.gz
 mv  gost-linux-amd64-2.11.5  gost
 chmod +x  gost
@@ -230,6 +230,43 @@ chmod +x  gost
 # ss param
 ss://aes-256-gcm:passwd@127.0.0.1:8388 
 ```
+
+
+
+## Protocal support list by gost
+These protocal only works up on the transport.  
+
+### Application Protocols  
+- http - HTTP
+- http2 - HTTP2
+- socks4 - SOCKS4 (2.4+)
+- socks4a - SOCKS4A (2.4+)
+- socks5 - SOCKS5
+- ss - Shadowsocks
+- ss2 - Shadowsocks with AEAD support (2.8+)
+- sni - SNI (2.5+)
+- forward - Forward (usually used to break down protocal, such as kcp+ss  to  kcp and ss)
+- relay - TCP/UDP relay (2.11+)
+
+### Transports Protocols  
+Tunnel based on these transport protocals.  
+You may change the protocal in cmd to protocal list here.    
+- tcp - raw TCP
+- tls - TLS
+- mtls - Multiplex TLS, add multiplex on TLS (2.5+)
+- ws - Websocket
+- mws - Multiplex Websocket (2.5+)
+- wss - Websocket Secure Websocket based on wss
+- mwss - Multiplex Websocket Secure, multiplex on TLS secured Websocket (2.5+)
+- kcp - KCP (2.3+)
+- quic - QUIC (2.4+)
+- ssh - SSH (2.4+)
+- h2 - HTTP2 (2.4+)
+- h2c - HTTP2 Cleartext (2.4+)
+- obfs4 - OBFS4 (2.4+)
+- ohttp - HTTP Obfuscation (2.7+)
+- otls - TLS Obfuscation (2.11+)
+
 
 
 
