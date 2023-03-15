@@ -255,16 +255,16 @@ chmod +x  gost
 
 # ss param
 ss://aes-256-gcm:passwd@127.0.0.1:8388 
-
-# ss cipher method contains:
-1. AES-256-CFB
-2. AES-128-CFB
-3. CHACHA20
-4. CHACHA20-IETF
-5. AES-256-GCM
-6. AES-128-GCM
-7. RC4-MD5
 ```
+ss cipher method contains:
+1. AES-256-CFB  
+2. AES-128-CFB  
+3. CHACHA20  
+4. CHACHA20-IETF  
+5. AES-256-GCM  
+6. AES-128-GCM  
+7. RC4-MD5  
+
 
 
 
