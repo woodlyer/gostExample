@@ -218,8 +218,8 @@ ssh root@127.0.0.1 -p 22
 ## gost remote port forward
 
 Forward the port :2222 on the server to the host(192.168.1.1:22) in client side.  
-![remote](./rtcp.png)
 
+<img src="./rtcp.jpg" width="200"  alt="rtcp"/><br/>
 
 ```
 # server
