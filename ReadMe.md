@@ -271,6 +271,7 @@ chmod +x  gost
 ss://aes-256-gcm:passwd@127.0.0.1:8388 
 ```
 ss cipher method contains:
+```
 1. AES-256-CFB  
 2. AES-128-CFB  
 3. CHACHA20  
@@ -278,12 +279,12 @@ ss cipher method contains:
 5. AES-256-GCM  
 6. AES-128-GCM  
 7. RC4-MD5  
-
+```
 
 
 
 ## Protocal support list by gost
-These protocal only works up on the transport.  
+These application protocal work up on the transport protocols.  
 
 ### Application Protocols  
 - http - HTTP
@@ -299,7 +300,7 @@ These protocal only works up on the transport.
 
 ### Transports Protocols  
 Tunnel based on these transport protocals.  
-You may change the protocal in cmd to protocal list here.  
+You may change the protocal in cmd to protocals listed here.  
 - tcp - raw TCP
 - tls - TLS
 - mtls - Multiplex TLS, add multiplex on TLS (2.5+)
