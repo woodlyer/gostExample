@@ -27,17 +27,7 @@ On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfau
 On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/utilities/shadowrocket) .  
 
 
-## gost default is a socks server
-gost listen socks on :1080  
-```
-gost -L :1080
-gost -L admin:123456@:1080
-gost -L :1080?auth=YWRtaW46MTIzNDU2
 
-# auth is base64(user:pass). generation method: 
-echo -n 'user:pass' | base64
-echo YWRtaW46MTIzNDU2 | base64 -d
-```
 
 
 
@@ -140,8 +130,21 @@ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 ```
 
 ## gost Proxy Examples
-gost act as a socks5 proxy.  
-you can connect socks5://127.0.0.1:8080 to connect the internet.
+
+gost default is a socks server.  
+```
+# gost listen socks on :1080  
+gost -L :1080
+gost -L admin:123456@:1080
+gost -L :1080?auth=YWRtaW46MTIzNDU2
+
+# auth is base64(user:pass). generation method: 
+echo -n 'user:pass' | base64
+echo YWRtaW46MTIzNDU2 | base64 -d
+```
+
+When gost act as a socks5 proxy.  
+you can connect socks5://127.0.0.1:1080 to connect the internet.
 Use kcp or other different protocal to pass the wall.  
 <img src="./proxy.png" width="600"  alt="proxy"/><br/>
 
