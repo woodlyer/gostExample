@@ -27,6 +27,20 @@ On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfau
 On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/utilities/shadowrocket) .  
 
 
+## gost default is a socks server
+gost listen socks on :1080  
+```
+gost -L :1080
+gost -L admin:123456@:1080
+gost -L :1080?auth=YWRtaW46MTIzNDU2
+
+# auth is base64(user:pass). generation method: 
+echo -n 'user:pass' | base64
+echo YWRtaW46MTIzNDU2 | base64 -d
+```
+
+
+
 ## General Network Knowlege
 
 gost is named from "GO Simple Tunnel", and it's always used as a tunnel.  
