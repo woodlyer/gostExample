@@ -27,11 +27,73 @@ On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfau
 On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/utilities/shadowrocket) .  
 
 
+## gost basic
+### gost default is a socks5 proxy server.  
+```
+# gost listen socks on :1080  
+gost -L :1080
+gost -L admin:123456@:1080
+gost -L :1080?auth=YWRtaW46MTIzNDU2
+
+# auth is base64(user:pass). generation method: 
+echo -n 'user:pass' | base64
+echo YWRtaW46MTIzNDU2 | base64 -d
+```
+### gost use -F to forward the socks5 request to the server
+```
+gost -L :1080   -F 1.2.3.4:8000
+```
+
+### Application protocol and Transport protocol  
+Protocal support list by gost:  
+These application protocals work up on the transport protocols.  
+
+1. Application Protocols  
+- http - HTTP
+- http2 - HTTP2
+- socks4 - SOCKS4 (2.4+)
+- socks4a - SOCKS4A (2.4+)
+- socks5 - SOCKS5
+- ss - Shadowsocks
+- ss2 - Shadowsocks with AEAD support (2.8+)
+- sni - SNI (2.5+)
+- forward - Forward (usually used to break down protocal, such as kcp+ss  to  kcp and ss). always work with tcp like this: "-L=tcp://  -F forward+kcp"
+- relay - TCP/UDP relay (2.11+). relay is always used to do tcp relay or udp relay.  
+
+2. Transports Protocols  
+Tunnel based on these transport protocals.  
+You may change the transport protocal in examples to a kind protocal listed here.  
+- tcp - raw TCP
+- tls - TLS
+- mtls - Multiplex TLS, add multiplex on TLS (2.5+)
+- ws - Websocket
+- mws - Multiplex Websocket (2.5+)
+- wss - Websocket Secure Websocket based on wss
+- mwss - Multiplex Websocket Secure, multiplex on TLS secured Websocket (2.5+)
+- kcp - KCP (2.3+)
+- quic - QUIC (2.4+)
+- ssh - SSH (2.4+)
+- h2 - HTTP2 (2.4+)
+- h2c - HTTP2 Cleartext (2.4+)
+- obfs4 - OBFS4 (2.4+)
+- ohttp - HTTP Obfuscation (2.7+)
+- otls - TLS Obfuscation (2.11+)
+
+3. How to choose a good transport protocol?  
+kcp and quic are based on udp. If udp is OK you cannot use them.  
+kcp support tcp mode.  use like this:  ./gost -L=kcp://:9000?tcp=true  
+tls / mtls is widely used when use tcp.   
+ws / wss / http is a little lower efficiency than tls.
 
 
 
 
-## General Network Knowlege
+
+
+
+
+
+## Tunnel Network Knowlege
 
 gost is named from "GO Simple Tunnel", and it's always used as a tunnel.  
 Although gost can works as a proxy.  
@@ -129,20 +191,8 @@ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 ./gost -L :8080 -F "relay+icmp://server_ip:12345?keepAlive=true&ttl=10s"
 ```
 
+
 ## gost Proxy Examples
-
-gost default is a socks server.  
-```
-# gost listen socks on :1080  
-gost -L :1080
-gost -L admin:123456@:1080
-gost -L :1080?auth=YWRtaW46MTIzNDU2
-
-# auth is base64(user:pass). generation method: 
-echo -n 'user:pass' | base64
-echo YWRtaW46MTIzNDU2 | base64 -d
-```
-
 When gost act as a socks5 proxy.  
 you can connect socks5://127.0.0.1:1080 to connect the internet.
 Use kcp or other different protocal to pass the wall.  
@@ -194,7 +244,7 @@ It's very good for user.
 ./gost -L=tcp://127.0.0.1:8388/remote_ip:port   -F relay+kcp://server_ip:9000   
 ```
 
-using tls to relay
+using tls to do the relay
 ```bash
 ./gost -L relay+tls://:9000 
 ./gost -L=tcp://127.0.0.1:8388/remote_ip:port  -F relay+tls://server_ip:9000
@@ -237,7 +287,6 @@ ssh root@127.0.0.1 -p 22
 ## gost remote port forward
 
 Forward the port :2222 on the server to the host(192.168.1.1:22) in client side.  
-
 <img src="./rtcp.png" width="600"  alt="rtcp"/><br/>
 
 ```
@@ -286,46 +335,10 @@ ss cipher method contains:
 
 
 
-## Protocal support list by gost
-These application protocal work up on the transport protocols.  
-
-### Application Protocols  
-- http - HTTP
-- http2 - HTTP2
-- socks4 - SOCKS4 (2.4+)
-- socks4a - SOCKS4A (2.4+)
-- socks5 - SOCKS5
-- ss - Shadowsocks
-- ss2 - Shadowsocks with AEAD support (2.8+)
-- sni - SNI (2.5+)
-- forward - Forward (usually used to break down protocal, such as kcp+ss  to  kcp and ss)
-- relay - TCP/UDP relay (2.11+)
-
-### Transports Protocols  
-Tunnel based on these transport protocals.  
-You may change the protocal in cmd to protocals listed here.  
-- tcp - raw TCP
-- tls - TLS
-- mtls - Multiplex TLS, add multiplex on TLS (2.5+)
-- ws - Websocket
-- mws - Multiplex Websocket (2.5+)
-- wss - Websocket Secure Websocket based on wss
-- mwss - Multiplex Websocket Secure, multiplex on TLS secured Websocket (2.5+)
-- kcp - KCP (2.3+)
-- quic - QUIC (2.4+)
-- ssh - SSH (2.4+)
-- h2 - HTTP2 (2.4+)
-- h2c - HTTP2 Cleartext (2.4+)
-- obfs4 - OBFS4 (2.4+)
-- ohttp - HTTP Obfuscation (2.7+)
-- otls - TLS Obfuscation (2.11+)
-
-### How to choose a good transport protocol?  
-kcp and quic are based on udp. If udp is blocked you cannot use them.  
-kcp support tcp mode.  use like this:  ./gost -L=kcp://:9000?tcp=true  
-tls / mtls is widely used when use tcp.   
-ws / wss / http is a little lower efficiency than tls.  
-
+## gost cmds to run KCP + V2ray  
+v2ray is a little complicated than ss.  
+but more popular.  
+If you want to run gost tunnel to support v2ray, please see  [v2ray dir](./v2ray)
 
 
 
