@@ -1,10 +1,15 @@
+This is a sample for v2ray to use vless-tcp running in gost tunnel.  
+vless-tls is not compatiable with gost tunnel.  
+
+
+
 
 gost build a tunnel to transport vless-tcp.   
 xray and v2fly are all compatiable with v2ray.  
 
 
 ```
-[xray client] ------tcp--->  [gost client:1234]------ kcp/tls/quic ----------> [gost server:9000] ----tcp--------->[xray server:1234]
+[xray client] -----tcp--->  [gost client:1234]-----kcp/tls/quic/wss----> [gost server:9000] ----tcp---->[xray server:1234]
 ```
 
 xray itself contains tls encryption.  So, this tunnel is like "Take off your pants and fart".  
