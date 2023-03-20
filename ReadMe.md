@@ -360,7 +360,7 @@ Oh, It's very easy. Buy one.
 - [bandwagonhost](https://bandwagonhost.com/aff.php?aff=56257)   $49.9 for 1 year.
 - [vultr.com](https://www.vultr.com/?ref=7621285)  Easy to use.
 - [DMIT](https://www.dmit.io/)   Many data center.
-- [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/BlackFriday/).  Only $10.28 for 1 year.
+- [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/NewYear/).  Only $10.28 for 1 year. If you want the net is fast, you should buy $24 vps, and select Location to Los Angeles.  
 
 
 
