@@ -7,7 +7,8 @@ xray and v2fly are all compatiable with v2ray.
 [xray client] ------tcp--->  [gost client:1234]------ kcp/tls/quic ----------> [gost server:9000] ----tcp--------->[xray server:1234]
 ```
 
-xray itself contains tls encryption.  So, this tunnel is like "Take off your pants and fart". 
+xray itself contains tls encryption.  So, this tunnel is like "Take off your pants and fart".  
+vless-tls example:  
 https://github.com/XTLS/Xray-examples/tree/main/VLESS-TCP-TLS  
 
 
