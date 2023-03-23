@@ -1,4 +1,4 @@
-#How to install gost as service
+# How to install gost as service
 
 copy gost binary to /usr/local/bin/gost  
 copy gost.service to systemd didrectory.  
