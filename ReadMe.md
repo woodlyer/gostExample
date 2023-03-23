@@ -338,7 +338,7 @@ ss cipher method contains:
 ## gost cmds to run KCP + V2ray  
 v2ray is a little complicated than ss.  
 but more popular.  
-If you want to run gost tunnel to support v2ray, please see  [v2ray dir](./v2ray)
+If you want to run gost tunnel to support v2ray, please see  [v2ray dir](./v2ray).
 
 
 
@@ -350,7 +350,9 @@ use nohup to run gost in background and the log redirect to gost.log
   nohup ./gost -L mtls://:443  >> gost.log  2>&1 &
 ```
 
-
+- run gost as service
+use systemd to install gost as service.  
+more info see [gost service](./service).
 
 
 
