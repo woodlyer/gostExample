@@ -111,7 +111,7 @@ The second line is for gost client, running on your PC.
 Suppose you are running SS(shadowsocks) or v2ray on 8388, on the client side, the gost tunnel works on 127.0.0.1:8083 links to SS or V2ray on your server.  
 You should modified the server_ip to your own domain name or ip address.   
 Gost supports many protocol. Such as quic, kcp, wss, tls etc. You may change the protocal to the one you need.  
- *** caution *** 
+ **!!!caution!!!**  
 In the example, I write "tcp://127.0.0.1:8083",  gost only serve for this PC.   
 If you want to serve for other PC,  you should write "tcp://:8083" .  
 
