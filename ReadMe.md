@@ -363,7 +363,7 @@ Oh, It's very easy. Buy one.
 - [vultr.com](https://www.vultr.com/?ref=7621285)  Easy to use.
 - [DMIT](https://www.dmit.io/)   Many data center.
 - [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/NewYear/).  Only $10.28 for 1 year. If you want the net is fast, you should buy $24 vps, and select Location to Los Angeles.
-- [ApeWeb] (https://cms.apeweb.uk/index.php?rp=/store/global-customers) Cheap, accepts customers globally including Iran and takes crypto currency. Servers in Europe.  
+- [ApeWeb](https://cms.apeweb.uk/index.php?rp=/store/global-customers) Cheap, accepts customers globally including Iran and takes crypto currency. Servers in Europe.  
 
 
 
