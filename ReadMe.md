@@ -11,7 +11,7 @@ It doesn't mean gost can only do this. Just because gost is too powerful for eve
 
 ## Introduce
 version 2 is here https://github.com/ginuerzh/gost  
-version 3 is here https://github.com/go-gost/gost **version 3 is now under developing. Not for publishing. **  
+version 3 is here https://github.com/go-gost/gost            **version 3 is now under developing. Not for publishing.**  
 
 Offical DOC site for v2: https://v2.gost.run/  
 Offical DOC site for v3: https://gost.run/
