@@ -7,6 +7,10 @@ Wants=network-online.target systemd-networkd-wait-online.service
 Type=simple
 User=root
 DynamicUser=true
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=infinity
+
 ExecStart=/usr/local/bin/gost  -L kcp://:9000 
 # ExecStart=/usr/local/bin/gost  -C /etc/gost/config.json
 
