@@ -35,10 +35,10 @@ unzip Xray-linux-64.zip
 
 
 # run gost on server
-./gost  -L relay+tls://:9000
-
 # or use kcp,quic, ws...  as you need.
+./gost  -L relay+tls://:9000
 ./gost  -L relay+kcp://:9000
+./gost  -L relay+quic://:9000
 ```
 
 
