@@ -350,10 +350,10 @@ quic with gost is slow.
 - kcptun is a good kcp tunnel, but it is blocked now. If you want to use kcptun, use this mod version: https://github.com/woodlyer/kcptunMod  
 - xray or v2fly. It's used by many people. They are main enemy of GFW. based on tcp.  
 
-hysteria:  https://github.com/apernet/hysteria
-tuic:  https://github.com/EAimTY/tuic
-kcptun:  https://github.com/xtaci/kcptun
-xray:  https://github.com/XTLS/Xray-core
+hysteria:  https://github.com/apernet/hysteria  
+tuic:  https://github.com/EAimTY/tuic  
+kcptun:  https://github.com/xtaci/kcptun  
+xray:  https://github.com/XTLS/Xray-core  
 
 
 
