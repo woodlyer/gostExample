@@ -11,16 +11,18 @@ It doesn't mean gost can only do this. Just because gost is too powerful for eve
 
 ## Introduce
 version 2 is here https://github.com/ginuerzh/gost  
-version 3 is here https://github.com/go-gost/gost **version 3 is now under developing. Not for publishing. **  
+version 3 is here https://github.com/go-gost/gost            
+**version 3 is now under developing. Not for publishing.**  
 
-Offical DOC site for v2: https://v2.gost.run/  
-Offical DOC site for v3: https://gost.run/
+Offical DOC site for version 2: https://v2.gost.run/  
+Offical DOC site for version 3: https://gost.run/
 
 
 ## Download and run
 Open release page to down the binaries for your platform.  
-v2: https://github.com/ginuerzh/gost/releases  
-v3: https://github.com/go-gost/gost/releases  
+version 2: https://github.com/ginuerzh/gost/releases  
+version 3: https://github.com/go-gost/gost/releases  
+**In version 3 release page,there is gost_amd64v3.tar.gz, It means the cpu support amd64v3, If you don't know what's amd64v3, use amd64.tar.gz.**  
 
 On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background.  
 On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfault-bilibili/ShadowsocksGostPlugin) .  
@@ -338,40 +340,56 @@ ss cipher method contains:
 ## gost cmds to run KCP + V2ray  
 v2ray is a little complicated than ss.  
 but more popular.  
-If you want to run gost tunnel to support v2ray, please see  [v2ray dir](./v2ray).
+If you want to run gost tunnel to support v2ray, please see  [v2ray dir in this repository](./v2ray).
 
 
 
-## Some tips
+# Compare to other tools
+- gost is a tunnel or proxy. gost support many protocol(such as tls,wss,quic,kcp...).  
+quic with gost is slow.  
+- hysteria is based on quic(modified), tcp or udp, act as tunnel or proxy. It support obfs, so will not be blocked for using quic.  
+- tuic is based on standard quic, and is the most fast. But maybe blocked for quic.  
+- kcptun is a good kcp tunnel, but it is blocked now. Use kcp of gost is OK.  
+- xray or v2fly. It's used by many people. They are the main enemy of GFW. based on tcp.   
 
+hysteria:  https://github.com/apernet/hysteria  
+tuic:      https://github.com/EAimTY/tuic  
+kcptun:    https://github.com/xtaci/kcptun  
+xray:      https://github.com/XTLS/Xray-core  
+
+
+
+
+# Some tips
+## how to run gost at background
 - run gost at background in Linux  
 use nohup to run gost in background and the log redirect to gost.log  
 ``` 
   nohup ./gost -L mtls://:443  >> gost.log  2>&1 &
 ```
 
-- run gost as service
-use systemd to install gost as service.  
+- run gost as a service  
+use systemd to install gost as a service.  
 more info see [gost service](./service).
 
 
 
 ## Doesn't have a VPS?
-Oh, It's very easy. Buy one.
-
+Oh, It's very easy. Buy one.  
 - [bandwagonhost](https://bandwagonhost.com/aff.php?aff=56257)   $49.9 for 1 year.
 - [vultr.com](https://www.vultr.com/?ref=7621285)  Easy to use.
 - [DMIT](https://www.dmit.io/)   Many data center.
 - [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/NewYear/).  Only $10.28 for 1 year. If you want the net is fast, you should buy $24 vps, and select Location to Los Angeles.
-- [ApeWeb](https://cms.apeweb.uk/index.php?rp=/store/global-customers) Cheap, accepts customers globally including Iran and takes crypto currency. Servers in Europe.  
+- [arvancloud.ir](https://arvancloud.ir) It's used by many Iran people. It support bitcoin and USDT.  
+- [ApeWeb](https://cms.apeweb.uk/index.php?rp=/store/global-customers) Cheap, accepts customers globally including Iran and takes crypto currency. Servers in Europe. 
 
 
 
 
 
 
-## Don't know how to do?
-If you have read this document and don't know how to use gost, maybe  you don't need to waste some more time on it.  
+## Still don't know how to do?
+If you have read this document and don't know how to use gost, maybe you don't need to waste some more time on it.  
 Please use some commercial mature VPN service.   
 Such as:
 - 1.[justMysocks.net](https://justmysocks.net/members/aff.php?aff=24386)   
@@ -388,7 +406,7 @@ You have read to here, why not click the star button for once?
 
 
 
-## Welcome Pull Requests
+# Welcome Pull Requests
 
 
 
