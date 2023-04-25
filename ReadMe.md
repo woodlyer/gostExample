@@ -374,6 +374,15 @@ more info see [gost service](./service).
 
 
 
+## run gost in openwrt
+Some openwrt system has can install gost easily by opkg. https://github.com/SuLingGG/OpenWrt-Rpi  
+The gost build for openwrt info is here:  https://github.com/kenzok8/openwrt-packages/tree/master/gost  
+luci-app-gost is the web page to admin gost. see: https://github.com/kenzok8/openwrt-packages/tree/master/luci-app-gost  
+
+
+
+
+
 ## Doesn't have a VPS?
 Oh, It's very easy. Buy one.  
 - [bandwagonhost](https://bandwagonhost.com/aff.php?aff=56257)   $49.9 for 1 year.
