@@ -11,8 +11,7 @@ It doesn't mean gost can only do this. Just because gost is too powerful for eve
 
 ## Introduce
 version 2 is here https://github.com/ginuerzh/gost  
-version 3 is here https://github.com/go-gost/gost            
-**version 3 is now under developing. Not for publishing.**  
+version 3 is here https://github.com/go-gost/gost  **version 3 is now under developing. Not for publishing.**  
 
 Offical DOC site for version 2: https://v2.gost.run/  
 Offical DOC site for version 3: https://gost.run/
@@ -21,8 +20,7 @@ Offical DOC site for version 3: https://gost.run/
 ## Download and run
 Open release page to down the binaries for your platform.  
 version 2: https://github.com/ginuerzh/gost/releases  
-version 3: https://github.com/go-gost/gost/releases  
-**In version 3 release page,there is gost_amd64v3.tar.gz, It means the cpu support amd64v3, If you don't know what's amd64v3, use amd64.tar.gz.**  
+version 3: https://github.com/go-gost/gost/releases **In version 3 release page,there is gost_amd64v3.tar.gz, It means the cpu support amd64v3, If you don't know what's amd64v3, use amd64.tar.gz.**  
 
 On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background.  
 On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfault-bilibili/ShadowsocksGostPlugin) .  
@@ -52,7 +50,7 @@ gost -L :1080   -F 1.2.3.4:8000
 # server
 gost -L kcp://:9000
 # client 
-gost -L :1080 -F kcp://server:9000
+gost -L :1080 -F kcp://server.com:9000
 ```
 2.gost works as a tunnel
 A tunnel is basicly a port mapping
@@ -124,10 +122,7 @@ ws / wss / http is a little lower efficiency than tls.
 
 
 
-
-
-
-## Tunnel Network Knowlege
+## What's Tunnel?
 
 gost is named from "GO Simple Tunnel", and it's always used as a tunnel.  
 Although gost can works as a proxy.  
@@ -163,7 +158,7 @@ If you want to change some parameter of kcp. you can write a file named "kcp.jso
 like this:  
 ```
 ./gost -L kcp://:9000/:8083?c=./kcp.json 
-./gost -L tcp://127.0.0.1:8083  -F forward+kcp://server_ip:9000?c=./kcp.json
+./gost -L tcp://127.0.0.1:8083  -F rekat+kcp://server_ip:9000?c=./kcp.json
 ```
 
 I recommend you to change the kcp.json. But default parameter doesn't matter much.   
@@ -201,20 +196,20 @@ kcp.json :
 
 ```
 ./gost -L tls://:443/:8083
-./gost -L=tcp://127.0.0.1:8083 -F forward+tls://server_ip:443
+./gost -L=tcp://127.0.0.1:8083 -F relay+tls://server_ip:443
 ```
 
 - quic tunnel
 ```
 ./gost -L quic://:1443/:8083
-./gost -L tcp://127.0.0.1:8083  -F "forward+quic://server_ip:1443"
+./gost -L tcp://127.0.0.1:8083  -F "relay+quic://server_ip:1443"
 ```
 
 - dtls tunnel.  
 dtls is only available in v3. 
 ```
 ./gost -L dtls://:1443/:8083
-./gost -L tcp://127.0.0.1:8083  -F "forward+dtls://server_ip:1443"
+./gost -L tcp://127.0.0.1:8083  -F "relay+dtls://server_ip:1443"
 ```
 
 - icmp tunnel.   
