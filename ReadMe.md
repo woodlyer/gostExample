@@ -46,6 +46,38 @@ echo YWRtaW46MTIzNDU2 | base64 -d
 gost -L :1080   -F 1.2.3.4:8000
 ```
 
+### gost is used to do port mapping and forwarding.  
+1.gost works as a proxy
+```
+# server
+gost -L kcp://:9000
+# client 
+gost -L :1080 -F kcp://server:9000
+```
+2.gost works as a tunnel
+A tunnel is basicly a port mapping
+```
+# port mapping :22 to local 192.168.0.100:22
+gost -L tcp://:22/192.168.0.100:22
+```
+port mapping through gost forward chain.
+```
+# set port mapping on server
+gost -L relay+kcp://:9000/192.168.0.100:22
+gost -L tcp://:22  -F relay+kcp://server.com:9000
+
+# set port mapping on client
+# port mapping with gost forward chain to server side, it's the same as upper cmds
+# here the 192.168.0.100 is server side target ip address
+gost -L  relay+kcp://:9000
+gost -L tcp://:22/192.168.0.100:22  -F  relay+kcp://server.com:9000
+
+# build tunnel with "forward" key word. It's the same as upper cmds 
+./gost -L kcp://:9000/192.168.0.100:22
+./gost -L tcp://:22  -F forward+kcp://server.com:9000
+```
+
+
 ### Application protocol and Transport protocol  
 Protocal support list by gost:  
 These application protocals work up on the transport protocols.  
