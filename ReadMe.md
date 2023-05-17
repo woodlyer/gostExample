@@ -43,10 +43,10 @@ echo YWRtaW46MTIzNDU2 | base64 -d
 ```
 ### gost use -F to forward the socks5 request to the server
 ```
-gost -L :1080   -F 1.2.3.4:8000
+gost -L :1080   -F 1.2.3.4:1080
 ```
 
-### gost is used to do port mapping and forwarding.  
+### gost is used as proxy or tunnel(port mapping).  
 1.gost works as a proxy
 ```
 # server
@@ -67,7 +67,7 @@ gost -L relay+kcp://:9000/192.168.0.100:22
 gost -L tcp://:22  -F relay+kcp://server.com:9000
 
 # set port mapping on client
-# port mapping with gost forward chain to server side, it's the same as upper cmds
+# it's the same as upper cmds
 # here the 192.168.0.100 is server side target ip address
 gost -L relay+kcp://:9000
 gost -L tcp://:22/192.168.0.100:22  -F  relay+kcp://server.com:9000
