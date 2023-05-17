@@ -427,7 +427,7 @@ Oh, It's very easy. Buy one.
 - [racknerd.com](https://my.racknerd.com/aff.php?aff=3278) It's very cheap. Click this link to buy  is cheap [BlackFriday](https://www.racknerd.com/NewYear/).  Only $10.28 for 1 year. If you want the net is fast, you should buy $24 vps, and select Location to Los Angeles.
 - [arvancloud.ir](https://arvancloud.ir) It's used by many Iran people. It support bitcoin and USDT.  
 - [ApeWeb](https://cms.apeweb.uk/index.php?rp=/store/global-customers) Cheap, accepts customers globally including Iran and takes crypto currency. Servers in Europe. 
-
+- [PQ Hosting](https://pq.hosting/?from=580849)  Europe vps provider, only 4.77€ per month. Very cheap.  
 
 
 
