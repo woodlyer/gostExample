@@ -20,7 +20,8 @@ Offical DOC site for version 3: https://gost.run/
 ## Download and run
 Open release page to down the binaries for your platform.  
 version 2: https://github.com/ginuerzh/gost/releases  
-version 3: https://github.com/go-gost/gost/releases **In version 3 release page,there is gost_amd64v3.tar.gz, It means the cpu support amd64v3, If you don't know what's amd64v3, use amd64.tar.gz.**  
+version 3: https://github.com/go-gost/gost/releases 
+**In version 3 release page,there is gost_amd64v3.tar.gz, It means the cpu support amd64v3, If you don't know what's amd64v3, use amd64.tar.gz.**  
 
 On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background.  
 On Android, May be you can use [ShadowsocksGostPlugin](https://github.com/segfault-bilibili/ShadowsocksGostPlugin) .  
@@ -67,7 +68,7 @@ gost -L tcp://:22  -F relay+kcp://server.com:9000
 # set port mapping on client
 # port mapping with gost forward chain to server side, it's the same as upper cmds
 # here the 192.168.0.100 is server side target ip address
-gost -L  relay+kcp://:9000
+gost -L relay+kcp://:9000
 gost -L tcp://:22/192.168.0.100:22  -F  relay+kcp://server.com:9000
 
 # build tunnel with "forward" key word. It's the same as upper cmds 
@@ -160,10 +161,9 @@ like this:
 ./gost -L kcp://:9000/:8083?c=./kcp.json 
 ./gost -L tcp://127.0.0.1:8083  -F rekat+kcp://server_ip:9000?c=./kcp.json
 ```
-
-I recommend you to change the kcp.json. But default parameter doesn't matter much.   
+ 
 More info about kcp parameter. see: https://github.com/xtaci/kcptun  
-kcp.json :
+kcp.json default value:
 ``` json
 {
     "key": "it's a secrect",
@@ -188,12 +188,13 @@ kcp.json :
     "tcp": false
 }
 ```
-
-
+change the "key" or "crypt" to be more secure.  
+"crypt" can be: aes, aes-128, aes-192, salsa20, blowfish, twofish, cast5, 3des, tea, xtea, xor, sm4, none  
+change "rcvwnd"  and "sndwnd" to 2048 to make kcp faster.  
+Other parameters doesn't need changed, if you don't know what it means.  
 
 
 - tls tunnel
-
 ```
 ./gost -L tls://:443/:8083
 ./gost -L=tcp://127.0.0.1:8083 -F relay+tls://server_ip:443
@@ -407,7 +408,14 @@ The gost build for openwrt info is here:  https://github.com/kenzok8/openwrt-pac
 luci-app-gost is the web page to admin gost. see: https://github.com/kenzok8/openwrt-packages/tree/master/luci-app-gost  
 
 
-
+## security caution
+Remember to add user and passwd autication, when you open a socks5 server on 0.0.0.0  
+Or just listen on 127.0.0.1  
+like this:  
+```
+gost -L admin:123456@:1080  # default listen on 0.0.0.0
+gost -L 127.0.0.1:1080      # only available on self
+```
 
 
 ## Doesn't have a VPS?
