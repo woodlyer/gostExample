@@ -22,6 +22,7 @@ Offical DOC site for version 3: https://gost.run/
 Open release page to down the binaries for your platform.  
 version 2: https://github.com/ginuerzh/gost/releases  
 version 3: https://github.com/go-gost/gost/releases 
+
 **In version 3 release page,there is gost_amd64v3.tar.gz, It means the cpu support amd64v3, If you don't know what's amd64v3, use amd64.tar.gz.**  
 
 On windows, if you don't want to see the black terminal, you can use [gostGUI](https://github.com/woodlyer/gostGUI) to run gost.exe in the background.  
@@ -30,12 +31,16 @@ On IOS, May be you can use [shadowrocket](https://www.applevis.com/apps/ios/util
 
 
 ## gost basic
-### gost default is a socks5 proxy server.  
+### gost default works as a socks5+http proxy server.  
+It can support socks5 and http proxy protocol at the same time.  
 ```
-# gost listen socks on :1080  
+# gost listen socks5 on :1080
 gost -L :1080
 gost -L admin:123456@:1080
 gost -L :1080?auth=YWRtaW46MTIzNDU2
+# you can use curl to test the proxy.
+curl -x socks5://localhost:1080 https://google.com
+curl -x http://localhost:1080   https://google.com
 
 # auth is base64(user:pass). generation method: 
 echo -n 'user:pass' | base64
@@ -43,44 +48,42 @@ echo YWRtaW46MTIzNDU2 | base64 -d
 ```
 ### gost use -F to forward the socks5 request to the server
 ```
-gost -L :1080   -F 1.2.3.4:1080
+gost -L :1080   # socks5 listen on server.com
+gost -L :1080   -F server.com:1080
 ```
 
-### gost is used as proxy or tunnel(port mapping).  
-1.gost works as a proxy
-```
-# server
-gost -L kcp://:9000
-# client 
-gost -L :1080 -F kcp://server.com:9000
-```
-2.gost works as a tunnel
+### gost can also works as a tunnel(port mapping).  
 A tunnel is basicly a port mapping
 ```
 # port mapping :22 to local 192.168.0.100:22
 gost -L tcp://:22/192.168.0.100:22
 ```
-port mapping through gost forward chain.
+
+Add -F to forward port mapping to remote host.
 ```
-# set port mapping on server
-gost -L relay+kcp://:9000/192.168.0.100:22
-gost -L tcp://:22  -F relay+kcp://server.com:9000
-
-# set port mapping on client
-# it's the same as upper cmds
-# here the 192.168.0.100 is server side target ip address
-gost -L relay+kcp://:9000
-gost -L tcp://:22/192.168.0.100:22  -F  relay+kcp://server.com:9000
-
-# build tunnel with "forward" key word. It's the same as upper cmds 
-./gost -L kcp://:9000/192.168.0.100:22
-./gost -L tcp://:22  -F forward+kcp://server.com:9000
+# run gost on server
+gost -L relay://:9000
+# run gost on client
+# here the 192.168.0.100 is server side host ip address
+gost -L tcp://:22/192.168.0.100:22  -F  relay://server.com:9000
 ```
-
 
 ### Application protocol and Transport protocol  
-Protocal support list by gost:  
+Protocals supported list by gost:  
 These application protocals work up on the transport protocols.  
+Application protocol is used to do proxy.  
+Transport protocol is used to do transport.  
+
+you can join them with "+", like this:
+```
+relay+kcp
+relay+tls
+relay+mtls
+
+http+kcp
+http+tls
+```
+
 
 1. Application Protocols  
 - http - HTTP
@@ -126,7 +129,7 @@ ws / wss / http is a little lower efficiency than tls.
 
 ## What's Tunnel?
 
-gost is named from "GO Simple Tunnel", and it's always used as a tunnel.  
+gost is named from "GO Simple Tunnel", and it was always used as a tunnel.  
 Although gost can works as a proxy.  
 
 When gost works as tunnel, the network is like this.  
@@ -160,7 +163,7 @@ If you want to change some parameter of kcp. you can write a file named "kcp.jso
 like this:  
 ```
 ./gost -L kcp://:9000/:8083?c=./kcp.json 
-./gost -L tcp://127.0.0.1:8083  -F rekat+kcp://server_ip:9000?c=./kcp.json
+./gost -L tcp://127.0.0.1:8083  -F forward+kcp://server_ip:9000?c=./kcp.json
 ```
  
 More info about kcp parameter. see: https://github.com/xtaci/kcptun  
@@ -258,7 +261,7 @@ Use kcp or other different protocal to pass the wall.
 
 
 
-## Remote port forward
+## Port forward
 If You want to connect  remote_ip and port. But you cann't for some reason.  
 So, You let the server do the port forward.   client directly connect to gost client to connect target.
 client ->  [gost client:port]  -> [gost server]  ->  [target ip+port]
@@ -271,11 +274,11 @@ It's very good for user.
 
 ```
 # client easily change the remote_ip and port
-./gost -L relay+kcp://:9000  
-./gost -L=tcp://127.0.0.1:8388/remote_ip:port   -F relay+kcp://server_ip:9000   
+./gost -L relay://:9000  
+./gost -L=tcp://127.0.0.1:8388/remote_ip:port   -F relay://server_ip:9000   
 ```
 
-using tls to do the relay
+using relay+tls to do the relay
 ```bash
 ./gost -L relay+tls://:9000 
 ./gost -L=tcp://127.0.0.1:8388/remote_ip:port  -F relay+tls://server_ip:9000
@@ -289,7 +292,7 @@ Another methods to do remote port forward.
 ./gost -L tcp://127.0.0.1:8388 -F forward+kcp://server_ip:9000
 
 
-# working. but not recommended maybe a little low efficency
+# set dest ip:port at client
 ./gost -L kcp://:9000   
 ./gost -L tcp://127.0.0.1:9000/remote_ip:port -F kcp://server_ip:9000
 ```
@@ -315,7 +318,9 @@ ssh root@127.0.0.1 -p 22
 
 
 
-## gost remote port forward
+## gost "rtcp" reverse port forward  
+"rtcp" means the dest is entry, it can reach your address.  
+The direction of rtcp is reverse to tcp port mapping.  
 
 Forward the port :2222 on the server to the host(192.168.1.1:22) in client side.  
 <img src="./rtcp.png" width="600"  alt="rtcp"/><br/>
@@ -410,13 +415,40 @@ luci-app-gost is the web page to admin gost. see: https://github.com/kenzok8/ope
 
 
 ## security caution
-Remember to add user and passwd autication, when you open a socks5 server on 0.0.0.0  
-Or just listen on 127.0.0.1  
-like this:  
+Remember to add user and password autication, when you listen a socks5 server on 0.0.0.0  
+Or you just listen on 127.0.0.1 like this:  
 ```
 gost -L admin:123456@:1080  # default listen on 0.0.0.0
 gost -L 127.0.0.1:1080      # only available on self
 ```
+
+
+# gost v3 tips
+gost version 3 is different from v2.
+
+## rtcp need bind parameter
+when you use gost v3 to do rtcp, you need add bind=true to allow server bind operation.  
+```
+gost -L relay://:9000?bind=true
+gost -L rtcp://:80/:8080 -F relay://server.com:9000
+```
+
+## kcp use tcp 
+gost v3 doesn't support tcp=true.
+```
+gost -L kcp://:9000?tcp=true   # no use
+gost -L kcp://:9000?c=tcp.json # use tcp.json to set tcp protocol
+```
+tcp.json content
+```
+{
+    "tcp": false
+}
+```
+
+
+
+
 
 
 ## Doesn't have a VPS?
