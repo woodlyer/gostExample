@@ -38,9 +38,11 @@ It can support socks5 and http proxy protocol at the same time.
 gost -L :1080
 gost -L admin:123456@:1080
 gost -L :1080?auth=YWRtaW46MTIzNDU2
+
 # you can use curl to test the proxy.
-curl -x socks5://localhost:1080 https://google.com
-curl -x http://localhost:1080   https://google.com
+curl -x socks5://localhost:1080  https://google.com
+curl -x socks5h://localhost:1080 https://google.com  #use socks5h to set remote server do dns resolve.
+curl -x http://localhost:1080    https://google.com
 
 # auth is base64(user:pass). generation method: 
 echo -n 'user:pass' | base64
