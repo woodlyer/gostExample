@@ -192,7 +192,7 @@ kcp.json default value:
     "tcp": false
 }
 ```
-change the "key" or "crypt" to be more secure.  
+You should change the "key" or "crypt" to be more secure.  
 "crypt" can be: aes, aes-128, aes-192, salsa20, blowfish, twofish, cast5, 3des, tea, xtea, xor, sm4, none  
 change "rcvwnd"  and "sndwnd" to 2048 to make kcp faster.  
 Other parameters doesn't need changed, if you don't know what it means.  
@@ -253,8 +253,8 @@ Use kcp or other different protocal to pass the wall.
 
 - kcp proxy with fake tcp
 ```
-./gost -L=kcp://:9000?tcp=true
-./gost -L=:1080 -F=kcp://server_ip:9000?tcp=true
+./gost -L=kcp://:9000?kcp.tcp=true
+./gost -L=:1080 -F=kcp://server_ip:9000?kcp.tcp=true
 ```
 
 
@@ -419,7 +419,7 @@ Remember to add user and password autication, when you listen a socks5 server on
 Or you just listen on 127.0.0.1 like this:  
 ```
 gost -L admin:123456@:1080  # default listen on 0.0.0.0
-gost -L 127.0.0.1:1080      # only available on self
+gost -L 127.0.0.1:1080      # only available on localhost
 ```
 
 
@@ -427,22 +427,23 @@ gost -L 127.0.0.1:1080      # only available on self
 gost version 3 is different from v2.
 
 ## rtcp need bind parameter
-when you use gost v3 to do rtcp, you need add bind=true to allow server bind operation.  
+when you use gost v3 to do rtcp, you must add "bind=true" to cmd to allow server's bind operation.  
 ```
 gost -L relay://:9000?bind=true
 gost -L rtcp://:80/:8080 -F relay://server.com:9000
 ```
 
 ## kcp use tcp 
-gost v3 doesn't support tcp=true.
+gost v3 support "kcp.tcp=true" to config kcp parameter.  
+more info see: https://gost.run/tutorials/protocols/kcp/  
 ```
-gost -L kcp://:9000?tcp=true   # no use
-gost -L kcp://:9000?c=tcp.json # use tcp.json to set tcp protocol
+gost -L kcp://:9000?kcp.tcp=true   # use tcp to transfer kcp, need root privilege.
+gost -L kcp://:9000?kcp.configFile=kcp.json # use kcp.json to set kcp parameter
 ```
-tcp.json content
+kcp.json content example.   
 ```
 {
-    "tcp": false
+    "tcp": true
 }
 ```
 
