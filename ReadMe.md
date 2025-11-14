@@ -329,12 +329,11 @@ Forward the port :2222 on the server to the host(192.168.1.1:22) in client side.
 
 ```
 # server
-./gost -L kcp://:9000            # for v2. 
-./gost -L kcp://:9000?bind=true  # for v3. bind=true to enable server bind function.
+./gost -L kcp://:9000
 # client
 ./gost -L=rtcp://:2222/192.168.1.1:22  -F=kcp://server_ip:9000
 
-# ssh cmd to access sshd server in the Intranet
+# ssh cmd
 ssh root@server_ip -p 2222
 ```
 
